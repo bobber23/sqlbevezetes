@@ -26,13 +26,13 @@ router.get('/test', (request, response) => {
     });
 });
 
-//?GET /api/selectall
-router.get('/selectall', async (request, response) => {
+//?GET /api/categories
+router.get('/categories', async (request, response) => {
     try {
-        const selectall = await database.selectall();
+        const categories = await database.categories();
         response.status(200).json({
             message: 'Ez a végpont működik.',
-            results: selectall
+            results: categories
         });
     } catch (error) {
         response.status(500).json({
@@ -41,10 +41,10 @@ router.get('/selectall', async (request, response) => {
     }
 });
 
-router.post('/insertinto', async (request, response) => {
+router.post('/categories', async (request, response) => {
     const body = request.body;
     try {
-        const insertinto = await database.insertinto(body.nev, body.ar, body.finom);
+        const insertinto = await database.insertinto(body.name);
         response.status(200).json({
             message: 'Ez a végpont működik.',
             insertId: insertinto
@@ -56,12 +56,13 @@ router.post('/insertinto', async (request, response) => {
     }
 });
 
-router.get('/avgar', async (request, response) => {
+router.post('/updatecategories/:id', async (request, response) => {
+    const itemId = request.params.id;
     try {
-        const avgar = await database.avgprice();
+        // const insertinto = await database.insertinto(body.name);
         response.status(200).json({
             message: 'Ez a végpont működik.',
-            avgAr: Object.values(avgar[0])[0]
+            itemId: itemId
         });
     } catch (error) {
         response.status(500).json({
@@ -69,5 +70,19 @@ router.get('/avgar', async (request, response) => {
         });
     }
 });
+
+// router.get('/avgar', async (request, response) => {
+//     try {
+//         const avgar = await database.avgprice();
+//         response.status(200).json({
+//             message: 'Ez a végpont működik.',
+//             avgAr: Object.values(avgar[0])[0]
+//         });
+//     } catch (error) {
+//         response.status(500).json({
+//             message: 'Ez a végpont nem működik.'
+//         });
+//     }
+// });
 
 module.exports = router;

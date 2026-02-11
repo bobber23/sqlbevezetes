@@ -1,12 +1,10 @@
-CREATE DATABASE suloskaja
+CREATE DATABASE webshop
 DEFAULT CHARACTER SET utf8
 COLLATE utf8_hungarian_ci;
 
-USE suloskaja;
+USE webshop;
 
-CREATE TABLE kaja(
+CREATE TABLE categories(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nev VARCHAR(67) NOT NULL UNIQUE,
-    ar INT NOT NULL,
-    finom VARCHAR(67) NOT NULL UNIQUE
+    name VARCHAR(67) NOT NULL
 );

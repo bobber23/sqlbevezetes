@@ -1,13 +1,24 @@
-GET http://127.0.0.1:3000/api/selectall HTTP/1.1
+GET http://127.0.0.1:3000/api/categories HTTP/1.1
 
 ###
 
+GET http://127.0.0.1:3000/api/avgar HTTP/1.1
 
-POST http://127.0.0.1:3000/api/insertinto HTTP/1.1
+###
+
+POST http://127.0.0.1:3000/api/categories HTTP/1.1
 content-type: application/json
 
 {
-    "nev": "Pizza",
-    "ar": 7002,
-    "finom": "Nagyoon finom!"
+    "name": ""
+}
+
+###
+
+POST http://127.0.0.1:3000/api/updatecategories/2 HTTP/1.1
+content-type: application/json
+
+{
+    "id": "",
+    "name": ""
 }

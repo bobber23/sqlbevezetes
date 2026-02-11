@@ -4,37 +4,34 @@ const pool = mysql.createPool({
     host: '127.0.0.1',
     user: 'root',
     password: '',
-    database: 'suloskaja',
+    database: 'webshop',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
 });
 
 //!SQL Queries
-async function selectall() {
-    const query = 'SELECT * FROM kaja;';
+async function categories() {
+    const query = 'SELECT * FROM categories;';
     const [rows] = await pool.execute(query);
     return rows;
 }
 
-async function insertinto(nev, ar, finom) {
-    const query = 'INSERT INTO kaja(nev, ar, finom) VALUES(?, ?, ?);';
+async function insertinto(name) {
+    const query = 'INSERT INTO categories(name) VALUES(?);';
     try {
-        const [rows] = await pool.execute(query, [nev, ar, finom]);
+        const [rows] = await pool.execute(query, [name]);
         return rows.insertId;
     } catch (error) {
-        if (error.code === 'ER_DUP_ENTRY') {
-            throw new Error(`Az étel neve vagy finomsága már létezik az adatdázisban!`);
-        }
         throw error;
     }
 }
 
-async function avgprice() {
-    const query = 'SELECT AVG(kaja.ar) FROM kaja;';
+async function categoriesupdate(name, id) {
+    const query = 'UPDATE categories SET categories.name = ? WHERE categories.id = ?;';
     try {
-        const [rows] = await pool.execute(query);
-        return rows;
+        const [rows] = await pool.execute(query, [name, id]);
+        return rows.insertId;
     } catch (error) {
         throw error;
     }
@@ -42,7 +39,7 @@ async function avgprice() {
 
 //!Export
 module.exports = {
-    selectall,
+    categories,
     insertinto,
-    avgprice
+    categoriesupdate
 };
