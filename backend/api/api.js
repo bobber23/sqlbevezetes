@@ -26,13 +26,42 @@ router.get('/test', (request, response) => {
     });
 });
 
-//?GET /api/testsql
-router.get('/testsql', async (request, response) => {
+//?GET /api/selectall
+router.get('/selectall', async (request, response) => {
     try {
         const selectall = await database.selectall();
         response.status(200).json({
             message: 'Ez a végpont működik.',
             results: selectall
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
+router.post('/insertinto', async (request, response) => {
+    const body = request.body;
+    try {
+        const insertinto = await database.insertinto(body.nev, body.ar, body.finom);
+        response.status(200).json({
+            message: 'Ez a végpont működik.',
+            insertId: insertinto
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
+router.get('/avgar', async (request, response) => {
+    try {
+        const avgar = await database.avgprice();
+        response.status(200).json({
+            message: 'Ez a végpont működik.',
+            avgAr: Object.values(avgar[0])[0]
         });
     } catch (error) {
         response.status(500).json({
