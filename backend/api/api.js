@@ -57,12 +57,14 @@ router.post('/categories', async (request, response) => {
 });
 
 router.post('/updatecategories/:id', async (request, response) => {
-    const itemId = request.params.id;
     try {
-        // const insertinto = await database.insertinto(body.name);
+        const updateCategories = await database.categoriesupdate(
+            request.body.name,
+            request.params.id
+        );
         response.status(200).json({
-            message: 'Ez a végpont működik.',
-            itemId: itemId
+            message: 'Frissült az adatbázis.',
+            updateCategories: updateCategories
         });
     } catch (error) {
         response.status(500).json({
@@ -71,18 +73,18 @@ router.post('/updatecategories/:id', async (request, response) => {
     }
 });
 
-// router.get('/avgar', async (request, response) => {
-//     try {
-//         const avgar = await database.avgprice();
-//         response.status(200).json({
-//             message: 'Ez a végpont működik.',
-//             avgAr: Object.values(avgar[0])[0]
-//         });
-//     } catch (error) {
-//         response.status(500).json({
-//             message: 'Ez a végpont nem működik.'
-//         });
-//     }
-// });
+router.post('/deletecategories/:id', async (request, response) => {
+    try {
+        const deleteCategories = await database.categoriesdelete(request.params.id);
+        response.status(200).json({
+            message: 'Törlődött a kategória.',
+            deleteCategories: deleteCategories
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
 
 module.exports = router;

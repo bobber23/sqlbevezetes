@@ -15,10 +15,18 @@ content-type: application/json
 
 ###
 
-POST http://127.0.0.1:3000/api/updatecategories/2 HTTP/1.1
+POST http://127.0.0.1:3000/api/updatecategories/3 HTTP/1.1
 content-type: application/json
 
 {
-    "id": "",
-    "name": ""
+    "name": "Zaza"
+}
+
+###
+
+POST http://127.0.0.1:3000/api/deletecategories/3 HTTP/1.1
+content-type: application/json
+
+{
+
 }

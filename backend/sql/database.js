@@ -31,7 +31,17 @@ async function categoriesupdate(name, id) {
     const query = 'UPDATE categories SET categories.name = ? WHERE categories.id = ?;';
     try {
         const [rows] = await pool.execute(query, [name, id]);
-        return rows.insertId;
+        return rows.updateCategories;
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function categoriesdelete(id) {
+    const query = 'DELETE FROM categories WHERE categories.id = ?;';
+    try {
+        const [rows] = await pool.execute(query, [id]);
+        return rows.deleteCategories;
     } catch (error) {
         throw error;
     }
@@ -41,5 +51,6 @@ async function categoriesupdate(name, id) {
 module.exports = {
     categories,
     insertinto,
-    categoriesupdate
+    categoriesupdate,
+    categoriesdelete
 };
