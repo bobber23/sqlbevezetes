@@ -1,32 +1,16 @@
-GET http://127.0.0.1:3000/api/categories HTTP/1.1
+GET http://127.0.0.1:3000/api/diakok HTTP/1.1
+
+###
+GET http://127.0.0.1:3000/api/jegyek/6 HTTP/1.1
 
 ###
 
-GET http://127.0.0.1:3000/api/avgar HTTP/1.1
 
-###
-
-POST http://127.0.0.1:3000/api/categories HTTP/1.1
+POST http://127.0.0.1:3000/api/insertinto HTTP/1.1
 content-type: application/json
 
 {
-    "name": ""
-}
-
-###
-
-POST http://127.0.0.1:3000/api/updatecategories/3 HTTP/1.1
-content-type: application/json
-
-{
-    "name": "Zaza"
-}
-
-###
-
-POST http://127.0.0.1:3000/api/deletecategories/3 HTTP/1.1
-content-type: application/json
-
-{
-
+    "nev": "Pizsgsdfsfza",
+    "ar": 7002,
+    "finom": "Nagydgoon fino"
 }

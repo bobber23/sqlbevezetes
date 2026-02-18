@@ -2,23 +2,52 @@
 <html lang="hu">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Főoldal</title>
-        <!--!Bootstrap-->
-        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
-        <!--?Popper: dropdowns, popovers, tooltips-->
-        <script src="../bootstrap/js/popper.min.js"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
-        <!--!CSS-->
+        <title>Iskolai jegykezelő</title>
         <link rel="stylesheet" href="../css/index.css" />
-        <!--!JavaScript-->
-        <script src="../javascript/index.js"></script>
     </head>
     <body>
-        <div class="container-fluid">
-            <div class="row text-center">
-                <h1 class="display-1">A szerver fut.</h1>
-            </div>
-        </div>
+        <h1>📘 Iskolai jegykezelő rendszer</h1>
+        <section>
+            <h2>👨‍🎓 Diákok</h2>
+            <table id="diakTabla">
+                <thead>
+                    <tr>
+                        <th>Név</th>
+                        <th>Osztály</th>
+                        <th>Művelet</th>
+                    </tr>
+                </thead>
+                <tbody id="diakTablaBody">
+                    <!-- JS tölti fel -->
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>📝 Jegyek</h2>
+            <table id="jegyTabla">
+                <thead>
+                    <tr>
+                        <th>Tantárgy</th>
+                        <th>Jegy</th>
+                        <th>Tanár</th>
+                        <th>Dátum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- JS tölti fel -->
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>➕ Új jegy felvétele</h2>
+            <form id="jegyForm">
+                <select id="diakId" required></select>
+                <select id="tanarId" required></select>
+                <select id="tantargy" required></select>
+                <input type="number" min="1" max="5" placeholder="Jegy" id="jegy" required />
+                <button type="submit">Mentés</button>
+            </form>
+        </section>
+        <script src="../javascript/index.js"></script>
     </body>
 </html>

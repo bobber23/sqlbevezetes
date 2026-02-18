@@ -6,6 +6,7 @@ const fs = require('fs/promises');
 //!Multer
 const multer = require('multer'); //?npm install multer
 const path = require('path');
+const { request } = require('http');
 
 const storage = multer.diskStorage({
     destination: (request, file, callback) => {
@@ -26,13 +27,74 @@ router.get('/test', (request, response) => {
     });
 });
 
-//?GET /api/categories
-router.get('/categories', async (request, response) => {
+//előzőfeladat
+// //?GET /api/categories
+// router.get('/categories', async (request, response) => {
+//     try {
+//         const categories = await database.categories();
+//         response.status(200).json({
+//             message: 'Ez a végpont működik.',
+//             results: categories
+//         });
+//     } catch (error) {
+//         response.status(500).json({
+//             message: 'Ez a végpont nem működik.'
+//         });
+//     }
+// });
+
+// router.post('/categories', async (request, response) => {
+//     const body = request.body;
+//     try {
+//         const insertinto = await database.insertinto(body.name);
+//         response.status(200).json({
+//             message: 'Ez a végpont működik.',
+//             insertId: insertinto
+//         });
+//     } catch (error) {
+//         response.status(500).json({
+//             message: 'Ez a végpont nem működik.'
+//         });
+//     }
+// });
+
+// router.post('/updatecategories/:id', async (request, response) => {
+//     try {
+//         const updateCategories = await database.categoriesupdate(
+//             request.body.name,
+//             request.params.id
+//         );
+//         response.status(200).json({
+//             message: 'Frissült az adatbázis.',
+//             updateCategories: updateCategories
+//         });
+//     } catch (error) {
+//         response.status(500).json({
+//             message: 'Ez a végpont nem működik.'
+//         });
+//     }
+// });
+
+// router.post('/deletecategories/:id', async (request, response) => {
+//     try {
+//         const deleteCategories = await database.categoriesdelete(request.params.id);
+//         response.status(200).json({
+//             message: 'Törlődött a kategória.',
+//             deleteCategories: deleteCategories
+//         });
+//     } catch (error) {
+//         response.status(500).json({
+//             message: 'Ez a végpont nem működik.'
+//         });
+//     }
+// });
+
+//?3.feladat
+router.get('/diakok', async (request, response) => {
     try {
-        const categories = await database.categories();
+        const diakok = await database.diakok();
         response.status(200).json({
-            message: 'Ez a végpont működik.',
-            results: categories
+            diakok: diakok
         });
     } catch (error) {
         response.status(500).json({
@@ -41,44 +103,12 @@ router.get('/categories', async (request, response) => {
     }
 });
 
-router.post('/categories', async (request, response) => {
-    const body = request.body;
+router.get('/jegyek/:diakId', async (request, response) => {
     try {
-        const insertinto = await database.insertinto(body.name);
+        const diakId = request.params.diakId;
+        const jegyek = await database.jegyek(diakId);
         response.status(200).json({
-            message: 'Ez a végpont működik.',
-            insertId: insertinto
-        });
-    } catch (error) {
-        response.status(500).json({
-            message: 'Ez a végpont nem működik.'
-        });
-    }
-});
-
-router.post('/updatecategories/:id', async (request, response) => {
-    try {
-        const updateCategories = await database.categoriesupdate(
-            request.body.name,
-            request.params.id
-        );
-        response.status(200).json({
-            message: 'Frissült az adatbázis.',
-            updateCategories: updateCategories
-        });
-    } catch (error) {
-        response.status(500).json({
-            message: 'Ez a végpont nem működik.'
-        });
-    }
-});
-
-router.post('/deletecategories/:id', async (request, response) => {
-    try {
-        const deleteCategories = await database.categoriesdelete(request.params.id);
-        response.status(200).json({
-            message: 'Törlődött a kategória.',
-            deleteCategories: deleteCategories
+            jegyek: jegyek
         });
     } catch (error) {
         response.status(500).json({
