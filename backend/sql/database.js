@@ -65,6 +65,17 @@ async function jegyek(id) {
     }
 }
 
+async function ujJegy(diak_id, tanar_id, tantargy, jegy) {
+    const query =
+        'INSERT INTO jegy(diak_id, tanar_id, tantargy, jegy, datum) VALUES(?, ?, ?, ?, NOW());';
+    try {
+        const [rows] = await pool.execute(query, [diak_id, tanar_id, tantargy, jegy]);
+        return rows;
+    } catch (error) {
+        throw error;
+    }
+}
+
 //!Export
 module.exports = {
     //előzőfeladat
@@ -73,5 +84,6 @@ module.exports = {
     // categoriesupdate,
     // categoriesdelete
     diakok,
-    jegyek
+    jegyek,
+    ujJegy
 };

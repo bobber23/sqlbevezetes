@@ -117,4 +117,23 @@ router.get('/jegyek/:diakId', async (request, response) => {
     }
 });
 
+router.post('/jegyek', async (request, response) => {
+    try {
+        const ujJegy = await database.ujJegy(
+            request.body.diak_id,
+            request.body.tanar_id,
+            request.body.tantargy,
+            request.body.jegy
+        );
+        response.status(200).json({
+            message: 'Sikeresen feltöltötte az új jegyet.',
+            ujJegy: ujJegy
+        });
+    } catch (error) {
+        response.status(500).json({
+            message: 'Ez a végpont nem működik.'
+        });
+    }
+});
+
 module.exports = router;

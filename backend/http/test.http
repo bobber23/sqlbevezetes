@@ -6,11 +6,12 @@ GET http://127.0.0.1:3000/api/jegyek/6 HTTP/1.1
 ###
 
 
-POST http://127.0.0.1:3000/api/insertinto HTTP/1.1
+POST http://127.0.0.1:3000/api/jegyek HTTP/1.1
 content-type: application/json
 
 {
-    "nev": "Pizsgsdfsfza",
-    "ar": 7002,
-    "finom": "Nagydgoon fino"
+    "diak_id": "3",
+    "tanar_id": "2",
+    "tantargy": "Matematika",
+    "jegy": "5"
 }
